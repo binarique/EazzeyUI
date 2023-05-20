@@ -1,0 +1,14 @@
+.column {
+    background-color: blue;
+    display: flex;
+    flex-direction: column wrap;
+    justify-content: space-evenly;
+    height: 100vh;
+    color: transparent;
+    padding: auto;
+    /* border: ;border-color: ;
+    border-radius: ; */
+    cursor: pointer;
+
+
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="text/css" href="eazzeyUI.css" />
+    <script src="eazzeyUI.js"></script>
+</head>
+
+<body>
+    <main id="app">
+    </main>
+    <script>
+        var app = new EazzeyApp("#app", {
+            body: Column({
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                //////////////////
+                Row({
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                Text("Good morning", {
+                    style: TextStyle({
+                        fontSize: 24,
+                        color: Colors.green,
+                        fontFamily: 'sans-serif',
+                        fontStyle: FontStyle.Italic,
+                        fontWeight: FontWeight.bold,
+                    })
+                    
+                }),
+               
+                Text("Demo",
+                {
+                    style: TextStyle({
+                        fontSize: 24,
+                        color: Colors.green,
+                        fontFamily: 'sans-serif',
+                        fontStyle: FontStyle.Normal,
+                        fontWeight: FontWeight.w300,
+                    })
+                    
+                }),
+                Text("Opps",
+                {
+                    style: TextStyle({
+                        fontSize: 24,
+                        color: Colors.green,
+                        fontFamily: 'sans-serif',
+                        fontStyle: FontStyle.Normal,
+                        fontWeight: FontWeight.w600,
+                    })
+                    
+                }
+                ),
+                ]},),
+                SizedBox({
+                  height: 40
+                }),
+                Row({
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                Text("Good morning", {
+                    style: TextStyle({
+                        fontSize: 24,
+                        color: Colors.white,
+                        backgroundColor: Colors.blue,
+                        fontFamily: 'sans-serif',
+                        fontStyle: FontStyle.Italic,
+                        fontWeight: FontWeight.lighter,
+                    })
+                    
+                }),
+                Text("Demo",
+                {
+                    style: TextStyle({
+                        fontSize: 20,
+                        color: Colors.red,
+                        fontFamily: 'sans-serif',
+                        fontWeight: FontWeight.w400,
+                    })
+                    
+                }
+                ),
+                Text("Opps",
+                {
+                    style: TextStyle({
+                        fontSize: 20,
+                        color: Colors.blue,
+                        fontFamily: 'sans-serif',
+                        fontWeight: FontWeight.w400,
+                    })
+                    
+                }
+                ),
+                ]},),
+
+
+
+//////////////////////////////
+                Row({
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                Text("Good morning", {
+                    style: TextStyle({
+                        fontSize: 24,
+                        color: Colors.green,
+                        fontFamily: 'sans-serif',
+                        fontStyle: FontStyle.Italic,
+                        fontWeight: FontWeight.bold,
+                    })
+                    
+                }),
+                Text("Demo",{
+                    style: TextStyle({
+                        fontSize: 18,
+                        color: Colors.green,
+                        fontFamily: 'sans-serif',
+                        fontStyle: FontStyle.Italic,
+                        fontWeight: FontWeight.w400,
+                    })
+                    
+                }),
+                Text("Opps",
+                {
+                    style: TextStyle({
+                        fontSize: 18,
+                        color: Colors.purple,
+                        fontFamily: 'sans-serif',
+                        fontStyle: FontStyle.Italic,
+                        fontWeight: FontWeight.w300,
+                    })
+                    
+                }
+                ),
+                ]},
+                ),
+         
+                SizedBox({
+                    height: 40
+                  }),
+
+                SizedBox({
+                height: 40,
+                child: Text("Godod",
+                {
+                    style: TextStyle({
+                        fontSize: 27,
+                        fontFamily: 'sans-serif',
+                        fontStyle: FontStyle.Italic,
+                        fontWeight: FontWeight.w300,
+                    })
+                    
+                }
+                ),}),
+
+            GestureDetector({
+                onTap: function(){
+                   alert("Hello");
+                },
+                child: Container({
+                padding: EdgeInsets.symmetric({horizontal: 40, vertical: 8}),
+                color:  Colors.blue,
+                decoration: BoxDecoration({
+                    borderRaduis: BorderRaduis.only({left: 6.0, right: 6.0}),
+                    border: Border({
+                        width: 5,
+                        color: Colors.red,
+                    })
+                }),
+                child: Text("Login",{
+                    style: TextStyle({
+                        fontSize: 16.0,
+                        fontFamily: 'sans-serif',
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white
+                    })
+                    
+                })
+            })
+        }),
+        SizedBox({
+            height: 10.0
+        }),
+        Container({
+            padding: EdgeInsets.symmetric({horizontal: 40, vertical: 10}),
+            color:  Colors.yellow,
+            decoration: BoxDecoration({
+                borderRaduis: BorderRaduis.only({left: 6.0, right: 6.0}),
+                border: Border({
+                    width: 2,
+                    color: Colors.green,
+                })
+            }),
+            child: Text("Sign up",{
+                style: TextStyle({
+                    fontSize: 16.0,
+                    fontFamily: 'sans-serif',
+                    fontWeight: FontWeight.w500,
+                    color: Colors.green
+                })
+                
+            })
+        })
+
+
+
+                ]
+            })
+        });
+        app.AddRoutes([
+            {
+                "to": "/",
+                "path": "screens/home-screen.html"
+            },
+            {
+                "to": "/services",
+                "path": "services-screen.html"
+            },
+            {
+                "to": "/aboutus",
+                "path": "screens/aboutus-screen.html"
+            },
+            {
+                "to": "/contact",
+                "path": "contact-screen.html"
+            },
+        ])
+        app.RenderUI(); 
+    </script>
+</body>
+
+</html>
