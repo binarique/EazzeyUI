@@ -1,6 +1,16 @@
 //MainAxisAlignment.center
 //crossAxisAlignment: CrossAxisAlignment,
 //////////////////////////////////////////
+
+function EventRoutines() {
+
+}
+var eventRoutines = [];
+/////////////
+function Random() {
+    return Math.ceil(Math.random() * 1000000);
+}
+//////////////////////////
 function xAxisAlignmentDelegate() {
     return {
         start: 0,
@@ -124,10 +134,12 @@ function Padding({ width = 0, height = 0, color = Colors.transparent, padding = 
 
 function GestureDetector({
     onTap = null,
-    onDoubleTap = null,
     child = ""
-}) {
-    return '<span style="cursor: pointer;">' + child + '</span>';
+} = {}) {
+    var randomno = Random();
+    var routineid = "gesture-event-" + randomno;
+    eventRoutines.push({ routine_id: routineid, "owner": "click", "routine": onTap });
+    return '<span id="' + routineid + '" style="cursor: pointer;">' + child + '</span>';
 }
 
 ///////////////////////////////////////
@@ -331,10 +343,27 @@ function EazzeyApp(ctx, { navbar = {}, body = "" } = {}) {
     //////////////////////
     this.RenderUI = function () {
         this.context.innerHTML = body;
-
+        /////////////////////////////////////
+        this.runEventRoutines();
+        // routine.addEventListener('click', function () {
+        //     eventRoutines[0].routine();
+        // });
+        // console.log(eventRoutines)
+        //console.log(routine);
     }
     this.getInitial = function () {
 
+    }
+    this.runEventRoutines = function () {
+        for (i = 0; i < eventRoutines.length; i++) {
+            var eroutine = eventRoutines[i];
+            var routine = document.querySelector("#" + eroutine.routine_id);
+            routine.addEventListener('click', function (i) {
+                // eventRoutines[i].routine();
+                console.log(i);
+            });
+            // console.log(routine);
+        }
     }
     this.initRoutes = function () {
         ////
@@ -346,4 +375,12 @@ function EazzeyApp(ctx, { navbar = {}, body = "" } = {}) {
         this.routes.push(route)
     }
 
+}
+
+
+function EventHandler(evenT) {
+
+    var code = document.querySelector("#" + evenT).getAttribute("data-code");
+    // eval(code);
+    // console.log(code);
 }
