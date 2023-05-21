@@ -134,11 +134,21 @@ function Padding({ width = 0, height = 0, color = Colors.transparent, padding = 
 
 function GestureDetector({
     onTap = null,
+    onDoubleTap = null,
+    onHover = null,
+    onLeave = null,
     child = ""
 } = {}) {
     var randomno = Random();
     var routineid = "gesture-event-" + randomno;
-    eventRoutines.push({ routine_id: routineid, "owner": "click", "routine": onTap });
+    eventRoutines.push({
+        routine_id: routineid, events: [
+            { owner: "click", routine: onTap },
+            { owner: "dblclick", routine: onDoubleTap },
+            { owner: "mouseover", routine: onHover },
+            { owner: "mouseout", routine: onLeave },
+        ], routine: onTap
+    });
     return '<span id="' + routineid + '" style="cursor: pointer;">' + child + '</span>';
 }
 
@@ -345,23 +355,20 @@ function EazzeyApp(ctx, { navbar = {}, body = "" } = {}) {
         this.context.innerHTML = body;
         /////////////////////////////////////
         this.makeEventRoutines();
-        // routine.addEventListener('click', function () {
-        //     eventRoutines[0].routine();
-        // });
-        // console.log(eventRoutines)
-        //console.log(routine);
     }
     this.getInitial = function () {
 
     }
     this.makeEventRoutines = function () {
-        for (i = 0; i < eventRoutines.length; i++) {
-            var eroutine = eventRoutines[i];
-            var routine = document.querySelector("#" + eroutine.routine_id);
-            routine.addEventListener('click', eroutine.routine);
-            routine.addEventListener('dblclick', eroutine.routine);
-            routine.addEventListener('mouseover', eroutine.routine);
-        }
+        eventRoutines.forEach((eventRoutine) => {
+            var routine = document.querySelector("#" + eventRoutine.routine_id);
+            eventRoutine.events.forEach((event) => {
+                if (event.routine != null) {
+                    routine.addEventListener(event.owner, event.routine);
+                }
+                // console.log(event);
+            });
+        })
 
     }
     this.initRoutes = function () {

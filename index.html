@@ -22,14 +22,24 @@
                     Row({
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                            Text("Good morning", {
-                                style: TextStyle({
-                                    fontSize: 24,
-                                    color: Colors.green,
-                                    fontFamily: 'sans-serif',
-                                    fontStyle: FontStyle.Italic,
-                                    fontWeight: FontWeight.bold,
-                                })
+                            GestureDetector({
+                                onTap: function () {
+                                    console.log("I love me");
+                                    alert("I love me alot");
+                                },
+                                onHover: function () {
+                                    alert("Hover is only on good morning!");
+                                },
+                                child: Text("Good morning", {
+                                    style: TextStyle({
+                                        fontSize: 24,
+                                        color: Colors.green,
+                                        fontFamily: 'sans-serif',
+                                        fontStyle: FontStyle.Italic,
+                                        fontWeight: FontWeight.bold,
+                                    })
+
+                                }),
 
                             }),
 
@@ -162,7 +172,7 @@
                     }),
 
                     GestureDetector({
-                        onTap: function () {
+                        onDoubleTap: function () {
                             alert("Hello");
                         },
                         child: Container({
