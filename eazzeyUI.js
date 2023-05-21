@@ -1,10 +1,5 @@
-//MainAxisAlignment.center
-//crossAxisAlignment: CrossAxisAlignment,
-//////////////////////////////////////////
+/**********EazzeyUI************* */
 
-function EventRoutines() {
-
-}
 var eventRoutines = [];
 /////////////
 function Random() {
@@ -33,14 +28,79 @@ function yAxisAlignmentDelegate() {
 }
 function colorsDelegate() {
     return {
-        black: "black",
-        white: "white",
-        red: "red",
-        blue: "blue",
-        green: "green",
-        purple: "purple",
-        yellow: "yellow",
-        transparent: "transparent"
+        black: {
+            delegate: "rgb(0,0,0)",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "rgba(0,0,0, " + opacity + ")"
+                }
+            },
+        },
+        white: {
+            delegate: "rgb(255,255,255)",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "rgba(0,0,255, " + opacity + ")"
+                }
+            },
+        },
+        red: {
+            delegate: "rgb(255,0,0)",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "rgba(255,0,0, " + opacity + ")"
+                }
+            },
+        },
+        blue: {
+            delegate: "rgb(0,0,255)",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "rgba(0,0,255, " + opacity + ")"
+                }
+            },
+        },
+
+        green: {
+            delegate: "rgb(	0,128,0)",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "rgba(0,128,0, " + opacity + ")"
+                }
+            },
+        },
+        purple: {
+            delegate: "rgb(0,128,0)",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "rgba(0,128,0, " + opacity + ")"
+                }
+            },
+        },
+        yellow: {
+            delegate: "rgb(255,255,0)",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "rgba(255,255,0, " + opacity + ")"
+                }
+            },
+        },
+        transparent: {
+            delegate: "transparent",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "transparent"
+                }
+            },
+        },
+        gray: {
+            delegate: "rgb(128,128,128)",
+            WithOpacity: function (opacity) {
+                return {
+                    delegate: "rgba(128,128,128, " + opacity + ")"
+                }
+            },
+        },
     };
 }
 
@@ -122,7 +182,7 @@ function borderRadiusDelegate() {
     }
 }
 ////////////////
-function Border({ width = 0, color = Colors.transparent, } = {}) {
+function Border({ width = 0, color = Colors.transparent } = {}) {
     return {
         width: width,
         color: color
@@ -184,12 +244,11 @@ function BoxDecoration({ borderRaduis = BorderRaduis.all(0), border = Border() }
 function Container({ color = Colors.transparent, decoration = BoxDecoration(), margin = EdgeInsets.all(0), padding = EdgeInsets.all(0), child = "" }) {
     var width = width == 0 ? "" : 'width: ' + width + 'px;';
     var height = height == 0 ? "" : 'height: ' + height + 'px;'
-
-    return '<div style="border-radius: ' + decoration.borderRaduis.top + 'px ' + decoration.borderRaduis.right + 'px ' + decoration.borderRaduis.bottom + 'px ' + decoration.borderRaduis.left + 'px;border: ' + decoration.border.width + 'px solid ' + decoration.border.color + ";" + width + height + 'background-color: ' + color + ';margin: ' + margin.top + 'px ' + margin.right + 'px ' + margin.bottom + 'px ' + margin.left + 'px; padding: ' + padding.top + 'px ' + padding.right + 'px ' + padding.bottom + 'px ' + padding.left + 'px;">' + child + '</div>';
+    return '<div style="border-radius: ' + decoration.borderRaduis.top + 'px ' + decoration.borderRaduis.right + 'px ' + decoration.borderRaduis.bottom + 'px ' + decoration.borderRaduis.left + 'px;border: ' + decoration.border.width + 'px solid ' + decoration.border.color.delegate + ";" + width + height + 'background-color: ' + color.delegate + ';margin: ' + margin.top + 'px ' + margin.right + 'px ' + margin.bottom + 'px ' + margin.left + 'px; padding: ' + padding.top + 'px ' + padding.right + 'px ' + padding.bottom + 'px ' + padding.left + 'px;">' + child + '</div>';
 }
 ////
 function TextStyle({ backgroundColor = Colors.transparent, color = Colors.black, fontSize = 16.0, fontFamily = 'Arial, Helvetica, sans-serif', fontWeight = FontWeight.w400, fontStyle = FontStyle.Normal } = {}) {
-    return 'background-color: ' + backgroundColor + ';color: ' + color + '; font-size: ' + fontSize + 'px;font-family: ' + fontFamily + ';font-weight: ' + fontWeight + ';font-style: ' + fontStyle;
+    return 'background-color: ' + backgroundColor.delegate + ';color: ' + color.delegate + '; font-size: ' + fontSize + 'px;font-family: ' + fontFamily + ';font-weight: ' + fontWeight + ';font-style: ' + fontStyle;
 }
 
 function SizedBox({ width = 0, height = 0, child = "" } = {}) {

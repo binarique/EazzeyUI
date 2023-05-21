@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="text/css" href="eazzeyUI.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
     <script src="eazzeyUI.js"></script>
 </head>
 
@@ -33,7 +37,7 @@
                                 child: Text("Good morning", {
                                     style: TextStyle({
                                         fontSize: 24,
-                                        color: Colors.green,
+                                        color: Colors.green.WithOpacity(0.4),
                                         fontFamily: 'sans-serif',
                                         fontStyle: FontStyle.Italic,
                                         fontWeight: FontWeight.bold,
@@ -79,7 +83,7 @@
                                     fontSize: 24,
                                     color: Colors.white,
                                     backgroundColor: Colors.blue,
-                                    fontFamily: 'sans-serif',
+                                    fontFamily: 'Roboto, sans-serif',
                                     fontStyle: FontStyle.Italic,
                                     fontWeight: FontWeight.lighter,
                                 })
@@ -120,9 +124,9 @@
                                 style: TextStyle({
                                     fontSize: 24,
                                     color: Colors.green,
-                                    fontFamily: 'sans-serif',
-                                    fontStyle: FontStyle.Italic,
-                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Roboto',
+                                    fontStyle: FontStyle.Normal,
+                                    fontWeight: FontWeight.w400,
                                 })
 
                             }),
@@ -177,7 +181,7 @@
                         },
                         child: Container({
                             padding: EdgeInsets.symmetric({ horizontal: 40, vertical: 8 }),
-                            color: Colors.blue,
+                            color: Colors.blue.WithOpacity(0.5),
                             decoration: BoxDecoration({
                                 borderRaduis: BorderRaduis.only({ left: 6.0, right: 6.0 }),
                                 border: Border({
