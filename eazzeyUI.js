@@ -344,7 +344,7 @@ function EazzeyApp(ctx, { navbar = {}, body = "" } = {}) {
     this.RenderUI = function () {
         this.context.innerHTML = body;
         /////////////////////////////////////
-        this.runEventRoutines();
+        this.makeEventRoutines();
         // routine.addEventListener('click', function () {
         //     eventRoutines[0].routine();
         // });
@@ -354,16 +354,15 @@ function EazzeyApp(ctx, { navbar = {}, body = "" } = {}) {
     this.getInitial = function () {
 
     }
-    this.runEventRoutines = function () {
+    this.makeEventRoutines = function () {
         for (i = 0; i < eventRoutines.length; i++) {
             var eroutine = eventRoutines[i];
             var routine = document.querySelector("#" + eroutine.routine_id);
-            routine.addEventListener('click', function (i) {
-                // eventRoutines[i].routine();
-                console.log(i);
-            });
-            // console.log(routine);
+            routine.addEventListener('click', eroutine.routine);
+            routine.addEventListener('dblclick', eroutine.routine);
+            routine.addEventListener('mouseover', eroutine.routine);
         }
+
     }
     this.initRoutes = function () {
         ////
