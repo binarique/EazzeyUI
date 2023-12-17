@@ -44,7 +44,7 @@
         var isPage1 = true;
         var counter = 1;
         var app = new EazzeyApp("#app", function () {
-
+            // onDoubleTap = null,
             return Column({
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,37 +53,28 @@
                     Row({
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                            // GestureDetector({
-                            //     onTap: function () {
-                            //         console.log("I love me");
-                            //         alert("I love me alot");
-                            //     },
-                            //     onHover: function () {
-                            //         alert("Hover is only on good morning!");
-                            //     },
-                            //     child: Text("Counter: " + counter, {
-                            //         style: TextStyle({
-                            //             fontSize: 30,
-                            //             color: Colors.green.WithOpacity(0.4),
-                            //             fontFamily: 'sans-serif',
-                            //             fontStyle: FontStyle.Italic,
-                            //             fontWeight: FontWeight.bold,
-                            //         })
+                            GestureDetector({
+                                onTap: function () {
+                                    console.log("I love me");
+                                    alert("I love me alot");
+                                },
+                                // onLeave: function () {
+                                //     alert("I have left the element");
+                                // },
+                                child: Text("Counter: " + counter, {
+                                    style: TextStyle({
+                                        fontSize: 40,
+                                        color: Colors.green.WithOpacity(0.4),
+                                        fontFamily: Fonts.arial,
+                                        fontStyle: FontStyle.lighter,
+                                        fontWeight: FontWeight.w100,
+                                    })
 
-                            //     }),
-
-                            // }),
-
-                            Text("Counter: " + counter, {
-                                style: TextStyle({
-                                    fontSize: 30,
-                                    color: Colors.green.WithOpacity(0.4),
-                                    fontFamily: 'sans-serif',
-                                    fontStyle: FontStyle.Italic,
-                                    fontWeight: FontWeight.bold,
-                                })
+                                }),
 
                             }),
+
+
 
                             SizedBox({
                                 width: 20,
@@ -221,14 +212,11 @@
 
                     GestureDetector({
                         onDoubleTap: function () {
-                            // alert("Hello");
-                            console.log(myText);
-                            myText = "Hello!!!!";
-                            console.log(myText);
+                            alert("Hello");
                         },
                         child: Container({
                             padding: EdgeInsets.symmetric({ horizontal: 40, vertical: 8 }),
-                            color: Colors.blue.WithOpacity(0.5),
+                            color: Colors.blue.WithOpacity(0.3),
                             decoration: BoxDecoration({
                                 borderRaduis: BorderRaduis.only({ left: 6.0, right: 6.0 }),
                                 border: Border({
@@ -282,6 +270,13 @@
                             })
                         })
                     }),
+
+                    TextField({
+                        autofocus: true,
+                        onChanged: function (event) {
+                            console.log(event.target.value);
+                        }
+                    })
 
 
 

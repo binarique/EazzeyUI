@@ -144,6 +144,24 @@ function fontWeightDelegate() {
         w900: 900
     };
 }
+
+
+function defaultHtmlFontsDelegate() {
+    return {
+        arial: "Arial",
+        verdana: "Verdana",
+        tahoma: "Tahoma",
+        trebuchet: "Trebuchet MS",
+        times: "Times New Roman",
+        georgia: "Georgia",
+        garamond: "Garamond",
+        courier: "Courier New",
+        brush: "Brush Script MT",
+
+    };
+}
+
+
 ///////////////////////////////////////////
 function edgeInsertsDelegate() {
     return {
@@ -216,6 +234,11 @@ function Padding({ width = 0, height = 0, color = Colors.transparent, padding = 
     return '<div style="padding: ' + padding.top + 'px ' + padding.right + 'px ' + padding.bottom + 'px ' + padding.left + 'px;">' + child + '</div>';
 }
 
+function getRoutineID() {
+    var randomno = Random();
+    return "gesture-event-" + randomno;
+}
+
 function GestureDetector({
     onTap = null,
     onDoubleTap = null,
@@ -223,15 +246,14 @@ function GestureDetector({
     onLeave = null,
     child = ""
 } = {}) {
-    var randomno = Random();
-    var routineid = "gesture-event-" + randomno;
+    var routineid = getRoutineID();
     eventRoutines.push({
         routine_id: routineid, events: [
-            { owner: "click", routine: onTap },
-            { owner: "dblclick", routine: onDoubleTap },
-            { owner: "mouseover", routine: onHover },
-            { owner: "mouseout", routine: onLeave },
-        ], routine: onTap
+            { owner: "click", "hasValue": false, routine: onTap },
+            { owner: "dblclick", "hasValue": false, routine: onDoubleTap },
+            { owner: "mouseover", "hasValue": false, routine: onHover },
+            { owner: "mouseout", "hasValue": false, routine: onLeave },
+        ]
     });
     return '<span id="' + routineid + '" style="cursor: pointer;">' + child + '</span>';
 }
@@ -250,12 +272,13 @@ function colorDelegate(color) {
 }
 var Colors = colorsDelegate();
 ///////////////
-var MainAxisAlignment = xAxisAlignmentDelegate();
-var CrossAxisAlignment = yAxisAlignmentDelegate();
-var FontWeight = fontWeightDelegate();
-var FontStyle = fontStyleDelegate();
-var EdgeInsets = edgeInsertsDelegate();
-var BorderRaduis = borderRadiusDelegate();
+const MainAxisAlignment = xAxisAlignmentDelegate();
+const CrossAxisAlignment = yAxisAlignmentDelegate();
+const FontWeight = fontWeightDelegate();
+const FontStyle = fontStyleDelegate();
+const EdgeInsets = edgeInsertsDelegate();
+const BorderRaduis = borderRadiusDelegate();
+const Fonts = defaultHtmlFontsDelegate();
 ///////////////////////////////////////////////////////
 function BoxDecoration({ borderRaduis = BorderRaduis.all(0), border = Border() } = {}) {
     return {
@@ -287,7 +310,117 @@ function Text(text, { style = "" } = {}) {
 }
 
 
+function TextField({ autofocus = false, onChanged = null, } = {}) {
+    var routineid = getRoutineID();
+    var autoFocusDelegate = autofocus ? "autofocus" : "";
+    eventRoutines.push({
+        routine_id: routineid, events: [
+            { owner: "input", "hasValue": false, routine: onChanged },
+        ]
+    });
+    return '<input id="' + routineid + '" type="text" ' + autoFocusDelegate + '>';
+}
 
+
+
+
+// class QuickInput extends StatefulWidget {
+//     QuickInput({
+//       Key? key,
+//       required this.changed,
+//       required this.hintText,
+//       this.isObsecure = false,
+//       this.autofocus = false,
+//       this.controller,
+//       this.borderColor = kinputcolor,
+//       this.primaryColor = kprimary,
+//       this.fillColor = kinputcolor,
+//       this.hintColor = Colors.white,
+//       this.autofillHints,
+//     }) : super(key: key);
+//     final Function changed;
+//     final String hintText;
+//     final bool isObsecure, autofocus;
+//     final TextEditingController? controller;
+//     final Color borderColor, primaryColor, fillColor, hintColor;
+//     Iterable<String>? autofillHints;
+//     @override
+//     State<QuickInput> createState() => _QuickInputState();
+//   }
+
+//   class _QuickInputState extends State<QuickInput> {
+//     bool isClosed = true;
+//     @override
+//     Widget build(BuildContext context) {
+//       return TextFormField(
+//         autofocus: widget.autofocus,
+//         controller: widget.controller,
+//         style: const TextStyle(
+//           fontFamily: 'Poppins',
+//           fontWeight: FontWeight.normal,
+//           fontSize: 16.0,
+//           color: Colors.white,
+//         ),
+//         cursorColor: Colors.white,
+//         decoration: InputDecoration(
+//           hintText: widget.hintText,
+//           hintStyle: TextStyle(
+//             fontFamily: 'Poppins',
+//             fontSize: 14.0,
+//             fontWeight: FontWeight.w400,
+//             color: widget.hintColor,
+//           ),
+//           filled: true,
+//           suffixIcon: widget.isObsecure
+//               ? Padding(
+//                   padding: const EdgeInsets.only(right: 18.0),
+//                   child: Material(
+//                     color: Colors.transparent,
+//                     child: InkWell(
+//                       onTap: () {
+//                         setState(() {
+//                           isClosed = !isClosed;
+//                         });
+//                       },
+//                       child: Container(
+//                         padding: const EdgeInsets.symmetric(
+//                           vertical: 8.0,
+//                         ),
+//                         height: 20.0,
+//                         width: 15.0,
+//                         color: Colors.transparent,
+//                         child: isClosed
+//                             ? const EyeClosedIcon()
+//                             : const EyeOpenIcon(),
+//                       ),
+//                     ),
+//                   ),
+//                 )
+//               : null,
+//           focusColor: widget.primaryColor,
+//           fillColor: widget.fillColor,
+//           hoverColor: widget.primaryColor,
+//           focusedBorder: OutlineInputBorder(
+//             borderRadius: const BorderRadius.all(Radius.circular(0)),
+//             borderSide: BorderSide(
+//               color: widget.primaryColor,
+//               width: 1,
+//             ),
+//           ),
+//           enabledBorder: OutlineInputBorder(
+//             borderRadius: const BorderRadius.all(Radius.circular(0)),
+//             borderSide: BorderSide(
+//               color: widget.borderColor,
+//               width: 1,
+//             ),
+//           ),
+//         ),
+//         autofillHints: widget.autofillHints,
+//         obscureText: widget.isObsecure ? isClosed : false,
+//         onChanged: (val) => widget.changed(val),
+//       );
+//     }
+//   }
 function NavBar() {
 
 }
@@ -458,6 +591,7 @@ function EazzeyApp(ctx, body) {
             var routine = document.querySelector("#" + eventRoutine.routine_id);
             if (routine != null) {
                 eventRoutine.events.forEach((event) => {
+                    console.log(event);
                     if (event.routine != null) {
                         routine.addEventListener(event.owner, event.routine);
                     }
@@ -476,7 +610,7 @@ function EazzeyApp(ctx, body) {
         this.initStateRoutines();
     }
     this.makeEventRoutines = function () {
-        console.log(eventRoutines);
+        // console.log(eventRoutines);
         eventRoutines.forEach((eventRoutine) => {
             var routine = document.querySelector("#" + eventRoutine.routine_id);
             eventRoutine.events.forEach((event) => {
