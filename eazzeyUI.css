@@ -3,12 +3,16 @@
     display: flex;
     flex-direction: column wrap;
     justify-content: space-evenly;
+    justify-self: center;
     height: 100vh;
     color: transparent;
     padding: auto;
     /* border: ;border-color: ;
     border-radius: ; */
     cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: 40px;
 
 
 }

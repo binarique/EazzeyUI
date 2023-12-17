@@ -5,6 +5,30 @@ var eventRoutines = [];
 function Random() {
     return Math.ceil(Math.random() * 1000000);
 }
+
+
+function hexToRgb(hex) {
+    var bigint = parseInt(hex, 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
+
+    return r + "," + g + "," + b;
+}
+
+function hexToRgbNew(hex) {
+    var arrBuff = new ArrayBuffer(4);
+    var vw = new DataView(arrBuff);
+    vw.setUint32(0, parseInt(hex, 16), false);
+    var arrByte = new Uint8Array(arrBuff);
+
+    return arrByte[1] + "," + arrByte[2] + "," + arrByte[3];
+}
+
+function setState(stateDelegate) {
+    stateDelegate();
+    window.location.reload()
+}
 //////////////////////////
 function xAxisAlignmentDelegate() {
     return {
@@ -406,19 +430,53 @@ function Row({ mainAxisAlignment = MainAxisAlignment.start, crossAxisAlignment =
 }
 
 
-function EazzeyApp(ctx, { navbar = {}, body = "" } = {}) {
+function EazzeyApp(ctx, body) {
     this.context = document.querySelector(ctx);
     this.routes = [];
     //////////////////////
     this.RenderUI = function () {
-        this.context.innerHTML = body;
+        var text = body();
+        this.context.innerHTML = text;
+        ////////////////////////////////////
         /////////////////////////////////////
-        this.makeEventRoutines();
     }
-    this.getInitial = function () {
+    this.initStateRoutines = function () {
+        //console.log(eventRoutines);
+        //setTimeout(() => this.FireStateRoutines(), 500);
+        // wait for the document to fully load to initiate events
+        window.addEventListener('load', this.FireStateRoutines());
 
+        // window.addEventListener('load', function () {
+        //     alert("It's loaded!")
+
+        // })
+    }
+    this.FireStateRoutines = function () {
+        // console.log(eventRoutines);
+        this.RenderUI();
+        eventRoutines.forEach((eventRoutine) => {
+            var routine = document.querySelector("#" + eventRoutine.routine_id);
+            if (routine != null) {
+                eventRoutine.events.forEach((event) => {
+                    if (event.routine != null) {
+                        routine.addEventListener(event.owner, event.routine);
+                    }
+                    // 
+                });
+                // console.log(eventRoutine);
+            }
+
+
+        });
+    }
+    //  
+    this.init = function () {
+        this.RenderUI();
+        this.makeEventRoutines();
+        this.initStateRoutines();
     }
     this.makeEventRoutines = function () {
+        console.log(eventRoutines);
         eventRoutines.forEach((eventRoutine) => {
             var routine = document.querySelector("#" + eventRoutine.routine_id);
             eventRoutine.events.forEach((event) => {

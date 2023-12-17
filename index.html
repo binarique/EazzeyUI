@@ -8,7 +8,9 @@
     <link rel="text/css" href="eazzeyUI.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet"> -->
 
     <script src="eazzeyUI.js"></script>
 </head>
@@ -17,34 +19,74 @@
     <main id="app">
     </main>
     <script>
-        var app = new EazzeyApp("#app", {
-            body: Column({
+        // var player = document.querySelector("#player");
+        // document.querySelector("#play-overlay").style.width = player.clientHeight + "px;";
+        // // console.log(player);
+        // // setAttribute("style", "width: " + player.videoHeight + "px;");
+        // //////////////////////////////
+        // document.querySelector("#play-overlay").addEventListener('click', function () {
+        //     player.play();
+        //     document.querySelector("#play-overlay").style.display = "none";
+
+        // })
+
+
+        // document.querySelector("#player").addEventListener('click', function () {
+        //     if (player.paused) {
+        //         player.play();
+        //         document.querySelector("#play-overlay").style.display = "none";
+        //     } else {
+        //         player.pause();
+        //         document.querySelector("#play-overlay").style.display = "flex";
+        //         document.querySelector("#play-button").style.display = "none";
+        //     }
+        // })
+        var isPage1 = true;
+        var counter = 1;
+        var app = new EazzeyApp("#app", function () {
+
+            return Column({
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                     //////////////////
                     Row({
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                            GestureDetector({
-                                onTap: function () {
-                                    console.log("I love me");
-                                    alert("I love me alot");
-                                },
-                                onHover: function () {
-                                    alert("Hover is only on good morning!");
-                                },
-                                child: Text("Good morning", {
-                                    style: TextStyle({
-                                        fontSize: 24,
-                                        color: Colors.green.WithOpacity(0.4),
-                                        fontFamily: 'sans-serif',
-                                        fontStyle: FontStyle.Italic,
-                                        fontWeight: FontWeight.bold,
-                                    })
+                            // GestureDetector({
+                            //     onTap: function () {
+                            //         console.log("I love me");
+                            //         alert("I love me alot");
+                            //     },
+                            //     onHover: function () {
+                            //         alert("Hover is only on good morning!");
+                            //     },
+                            //     child: Text("Counter: " + counter, {
+                            //         style: TextStyle({
+                            //             fontSize: 30,
+                            //             color: Colors.green.WithOpacity(0.4),
+                            //             fontFamily: 'sans-serif',
+                            //             fontStyle: FontStyle.Italic,
+                            //             fontWeight: FontWeight.bold,
+                            //         })
 
-                                }),
+                            //     }),
 
+                            // }),
+
+                            Text("Counter: " + counter, {
+                                style: TextStyle({
+                                    fontSize: 30,
+                                    color: Colors.green.WithOpacity(0.4),
+                                    fontFamily: 'sans-serif',
+                                    fontStyle: FontStyle.Italic,
+                                    fontWeight: FontWeight.bold,
+                                })
+
+                            }),
+
+                            SizedBox({
+                                width: 20,
                             }),
 
                             Text("Demo",
@@ -58,6 +100,11 @@
                                     })
 
                                 }),
+
+                            SizedBox({
+                                width: 20,
+                            }),
+
                             Text("Opps",
                                 {
                                     style: TextStyle({
@@ -113,9 +160,6 @@
                             ),
                         ]
                     },),
-
-
-
                     //////////////////////////////
                     Row({
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,7 +221,10 @@
 
                     GestureDetector({
                         onDoubleTap: function () {
-                            alert("Hello");
+                            // alert("Hello");
+                            console.log(myText);
+                            myText = "Hello!!!!";
+                            console.log(myText);
                         },
                         child: Container({
                             padding: EdgeInsets.symmetric({ horizontal: 40, vertical: 8 }),
@@ -207,6 +254,12 @@
                     GestureDetector({
                         onTap: function () {
                             alert("Hi");
+                            // setState(function () {
+                            //     isPage1 = false;
+                            // })
+                            console.log("Hi!!!!");
+                            counter++;
+
                         },
                         child: Container({
                             padding: EdgeInsets.symmetric({ horizontal: 40, vertical: 10 }),
@@ -233,8 +286,8 @@
 
 
                 ]
-            })
-        });
+            });
+        })
         app.AddRoutes([
             {
                 "to": "/",
@@ -253,7 +306,7 @@
                 "path": "contact-screen.html"
             },
         ])
-        app.RenderUI(); 
+        app.init();
     </script>
 </body>
 
