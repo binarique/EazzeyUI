@@ -310,7 +310,8 @@ function Text(text, { style = "" } = {}) {
 }
 
 
-function TextField({ autofocus = false, onChanged = null, } = {}) {
+function TextField({ hintText = "", autofocus = false, onChanged = null, } = {}) {
+
     var routineid = getRoutineID();
     var autoFocusDelegate = autofocus ? "autofocus" : "";
     eventRoutines.push({
@@ -318,7 +319,7 @@ function TextField({ autofocus = false, onChanged = null, } = {}) {
             { owner: "input", "hasValue": false, routine: onChanged },
         ]
     });
-    return '<input id="' + routineid + '" type="text" ' + autoFocusDelegate + '>';
+    return '<input placeholder="' + hintText + '" id="' + routineid + '" type="text" ' + autoFocusDelegate + '>';
 }
 
 
@@ -593,7 +594,12 @@ function EazzeyApp(ctx, body) {
                 eventRoutine.events.forEach((event) => {
                     console.log(event);
                     if (event.routine != null) {
-                        routine.addEventListener(event.owner, event.routine);
+                        if (event.owner == "input" && event.hasValue) { // input change event
+                            routine.addEventListener(event.owner, event.routine);
+                        } else {
+                            routine.addEventListener(event.owner, (evt) => event.routine(evt.target.value));
+                        }
+
                     }
                     // 
                 });

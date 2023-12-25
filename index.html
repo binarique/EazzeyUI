@@ -270,13 +270,25 @@
                             })
                         })
                     }),
+                    SizedBox({ height: 20 }),
 
                     TextField({
                         autofocus: true,
-                        onChanged: function (event) {
-                            console.log(event.target.value);
+                        hintText: "First name",
+                        onChanged: function (val) {
+                            console.log(val);
                         }
-                    })
+                    }),
+                    SizedBox({ height: 20 }),
+
+                    TextField({
+                        autofocus: true,
+                        hintText: "Last name",
+                        onChanged: function (val) {
+                            console.log(val);
+                        }
+                    }),
+                    SizedBox({ height: 20 }),
 
 
 
